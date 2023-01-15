@@ -45,21 +45,41 @@
 // Console.WriteLine(NumbersRec1(1, 10));
 
 //=================
-// Задача 3
-// требуется найти сумму чисел от 1 до n
+// // Задача 3
+// // требуется найти сумму чисел от 1 до n
+// // Итеративный подход
+// int SumFor(int n)
+// {
+//     int result = 0;
+//     for(int i = 1; i <= n; i++) result += i;
+//     return result;
+// }
+// Console.WriteLine(SumFor(10));
+
+// // Рекурсия
+// int SumRec(int n)
+// {
+//     if(n == 0) return 0;
+//     else return n + SumRec(n - 1);
+// }
+// Console.WriteLine(SumRec(10));
+
+//===================
+// Задача 4
+// Факториал числа
 // Итеративный подход
-int SumFor(int n)
+int FactorialFor(int n)
 {
-    int result = 0;
-    for(int i = 1; i <= n; i++) result += i;
+    int result = 1;
+    for(int i = 1; i <= n; i++) result *= i;
     return result;
 }
-Console.WriteLine(SumFor(10));
+Console.WriteLine(FactorialFor(10));
 
-// Рекурсия
-int SumRec(int n)
+// Рекурсивный подход
+int FactorialRec(int n)
 {
-    if(n == 0) return 0;
-    else return n + SumRec(n - 1);
+    if(n == 1) return 1;
+    else return n * FactorialRec(n - 1);
 }
-Console.WriteLine(SumRec(10));
+Console.WriteLine(FactorialRec(10));
