@@ -203,20 +203,79 @@
 // Towers();
 
 //=============================
-// Задача 9
-// Обход разных структур
-string emp = String.Empty;
-string[] tree = {emp, "/", "*", "10", "-", "+", emp, emp, "4", "2", "1", "3"};
+// // Задача 9
+// // Обход разных структур
+// string emp = String.Empty;
+// string[] tree = {emp, "/", "*", "10", "-", "+", emp, emp, "4", "2", "1", "3"};
 
-void InOrderTraversal(int pos = 1)
+// void InOrderTraversal(int pos = 1)
+// {
+//     if(pos < tree.Length)
+//     {
+//         int left = 2 * pos;
+//         int right = 2 * pos + 1;
+//         if(left < tree.Length && !String.IsNullOrEmpty(tree[left])) InOrderTraversal(left);
+//         Console.WriteLine(tree[pos]);
+//         if(right < tree.Length && !String.IsNullOrEmpty(tree[right])) InOrderTraversal(right);
+//     }
+// }
+// InOrderTraversal();
+
+//=====================
+// Задача 10
+// Проблемы
+// Долгое время подсчёта
+decimal fRec = 0;
+decimal fIte = 0;
+
+decimal FibonacciRecursion(int n)
 {
-    if(pos < tree.Length)
-    {
-        int left = 2 * pos;
-        int right = 2 * pos + 1;
-        if(left < tree.Length && !String.IsNullOrEmpty(tree[left])) InOrderTraversal(left);
-        Console.WriteLine(tree[pos]);
-        if(right < tree.Length && !String.IsNullOrEmpty(tree[right])) InOrderTraversal(right);
-    }
+    fRec++;
+    return n == 0 || n == 1 ? 1 : FibonacciRecursion(n - 1) + FibonacciRecursion(n - 2);
 }
-InOrderTraversal();
+
+decimal FibonacciIteration(int n)
+{
+    fIte++;
+    decimal result = 1;
+    decimal f0 = 1;
+    decimal f1 = 1;
+    for(int i = 2; i <= n; i++)
+    {
+        result = f0 + f1;
+        f0 = f1;
+        f1 = result;
+        fIte++;
+    }
+    return result;
+}
+
+// # 1 2 3 4 5 6
+// V 1 1 2 3 5 8
+
+DateTime dt = DateTime.Now;
+
+Console.ReadLine();
+
+for(int n = 10; n < 40; n++)
+{
+    Console.WriteLine($"FibonacciIteration({n}) = {FibonacciIteration(n)} fIte = {fIte.ToString("### ### ###"), -15}");
+    fIte = 0;
+}
+
+System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
+
+Console.WriteLine();
+Console.ReadLine();
+
+dt = DateTime.Now;
+
+for(int n = 10; n < 40; n++)
+{
+    Console.WriteLine($"FibonacciRecursion({n}) = {FibonacciRecursion(n)} fRec = {fRec.ToString("### ### ###"), -15}");
+    fRec = 0;
+}
+
+System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
+
+Console.ReadLine();
