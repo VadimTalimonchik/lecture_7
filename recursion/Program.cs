@@ -222,60 +222,102 @@
 // InOrderTraversal();
 
 //=====================
-// Задача 10
-// Проблемы
-// Долгое время подсчёта
-decimal fRec = 0;
-decimal fIte = 0;
+// // Задача 10
+// // Проблемы
+// // Долгое время подсчёта
+// decimal fRec = 0;
+// decimal fIte = 0;
 
-decimal FibonacciRecursion(int n)
+// decimal FibonacciRecursion(int n)
+// {
+//     fRec++;
+//     return n == 0 || n == 1 ? 1 : FibonacciRecursion(n - 1) + FibonacciRecursion(n - 2);
+// }
+
+// decimal FibonacciIteration(int n)
+// {
+//     fIte++;
+//     decimal result = 1;
+//     decimal f0 = 1;
+//     decimal f1 = 1;
+//     for(int i = 2; i <= n; i++)
+//     {
+//         result = f0 + f1;
+//         f0 = f1;
+//         f1 = result;
+//         fIte++;
+//     }
+//     return result;
+// }
+
+// // # 1 2 3 4 5 6
+// // V 1 1 2 3 5 8
+
+// DateTime dt = DateTime.Now;
+
+// Console.ReadLine();
+
+// for(int n = 10; n < 40; n++)
+// {
+//     Console.WriteLine($"FibonacciIteration({n}) = {FibonacciIteration(n)} fIte = {fIte.ToString("### ### ###"), -15}");
+//     fIte = 0;
+// }
+
+// System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
+
+// Console.WriteLine();
+// Console.ReadLine();
+
+// dt = DateTime.Now;
+
+// for(int n = 10; n < 40; n++)
+// {
+//     Console.WriteLine($"FibonacciRecursion({n}) = {FibonacciRecursion(n)} fRec = {fRec.ToString("### ### ###"), -15}");
+//     fRec = 0;
+// }
+
+// System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
+
+// Console.ReadLine();
+
+//======================
+// Задача 11
+// Закрашивание фигуры из прошлой лекции про рекурсию
+int[,] pic = new int[10, 10];
+for(int i = 0; i < 10; i++)
 {
-    fRec++;
-    return n == 0 || n == 1 ? 1 : FibonacciRecursion(n - 1) + FibonacciRecursion(n - 2);
+    pic[0, i] = 1;
+    pic[i, 0] = 1;
+    pic[i, 9] = 1;
+    pic[9, i] = 1;
 }
 
-decimal FibonacciIteration(int n)
-{
-    fIte++;
-    decimal result = 1;
-    decimal f0 = 1;
-    decimal f1 = 1;
-    for(int i = 2; i <= n; i++)
-    {
-        result = f0 + f1;
-        f0 = f1;
-        f1 = result;
-        fIte++;
-    }
-    return result;
-}
-
-// # 1 2 3 4 5 6
-// V 1 1 2 3 5 8
-
-DateTime dt = DateTime.Now;
-
-Console.ReadLine();
-
-for(int n = 10; n < 40; n++)
-{
-    Console.WriteLine($"FibonacciIteration({n}) = {FibonacciIteration(n)} fIte = {fIte.ToString("### ### ###"), -15}");
-    fIte = 0;
-}
-
-System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
-
+PrintImage(pic);
+FillImage(1, 1);
 Console.WriteLine();
-Console.ReadLine();
+PrintImage(pic);
 
-dt = DateTime.Now;
-
-for(int n = 10; n < 40; n++)
+void PrintImage(int[,] image)
 {
-    Console.WriteLine($"FibonacciRecursion({n}) = {FibonacciRecursion(n)} fRec = {fRec.ToString("### ### ###"), -15}");
-    fRec = 0;
+    for(int i = 0; i < image.GetLength(0); i++)
+    {
+        for(int j = 0; j < image.GetLength(0); j++)
+        {
+            if(image[i, j] == 0) Console.Write($" ");
+            else Console.Write($"+");
+        }
+        Console.WriteLine();
+    }
 }
 
-System.Console.WriteLine((DateTime.Now - dt).TotalMilliseconds);
-
-Console.ReadLine();
+void FillImage(int row, int col)
+{
+    if(pic[row, col] == 0)
+    {
+        pic[row, col] = 1;
+        FillImage(row - 1, col);
+        FillImage(row, col - 1);
+        FillImage(row + 1, col);
+        FillImage(row, col + 1);
+    }
+}
